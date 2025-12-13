@@ -1,0 +1,83 @@
+# AppVeyor CI/CD configuration for RAM Video Player
+# Builds executables for Windows and macOS
+
+image:
+  - Visual Studio 2022
+  - macOS
+
+# Version format
+version: 0.016.{build}
+
+# Branches to build
+branches:
+  only:
+    - main
+    - master
+
+# Environment variables
+environment:
+  PYTHON: "C:\\Python311"
+  PYTHON_VERSION: "3.11"
+
+# Build matrix
+for:
+  # Windows build configuration
+  - matrix:
+      only:
+        - image: Visual Studio 2022
+
+    install:
+      - cmd: set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+      - cmd: python --version
+      - cmd: python -m pip install --upgrade pip
+      - cmd: pip install -r requirements.txt
+      - cmd: pip install pyinstaller
+
+    build_script:
+      - cmd: pyinstaller --onefile --windowed --name "RAM-Video-Player" video.py
+
+    after_build:
+      - cmd: dir dist
+      - cmd: 7z a RAM-Video-Player-Windows.zip .\dist\RAM-Video-Player.exe
+
+    artifacts:
+      - path: RAM-Video-Player-Windows.zip
+        name: Windows Executable
+
+    test: off
+
+  # macOS build configuration
+  - matrix:
+      only:
+        - image: macOS
+
+    install:
+      - sh: python3 --version
+      - sh: python3 -m pip install --upgrade pip
+      - sh: pip3 install -r requirements.txt
+      - sh: pip3 install pyinstaller
+
+    build_script:
+      - sh: pyinstaller --windowed --name "RAM Video Player" video.py
+
+    after_build:
+      - sh: ls -la dist/
+      - sh: cd dist && zip -r ../RAM-Video-Player-macOS.zip "RAM Video Player.app" && cd ..
+
+    artifacts:
+      - path: RAM-Video-Player-macOS.zip
+        name: macOS Application
+
+    test: off
+
+# Deployment (optional - uncomment and configure as needed)
+# deploy:
+#   - provider: GitHub
+#     auth_token:
+#       secure: YOUR_GITHUB_TOKEN_HERE
+#     artifact: /.*\.zip/
+#     draft: false
+#     prerelease: false
+#     on:
+#       branch: main
+#       APPVEYOR_REPO_TAG: true

@@ -1,4 +1,4 @@
-# RAM Video Player QC
+# RAM Video Player
 
 A RAM-based video player with Quality Control (QC) annotation features. Built with PySide6 and OpenCV, this application loads entire videos into memory for smooth playback and frame-accurate drawing annotations.
 

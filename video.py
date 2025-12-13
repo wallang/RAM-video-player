@@ -1,4 +1,4 @@
-# RAM Video Player QC
+# RAM Video Player
 # Single-file app (PySide6 + OpenCV)
 #
 # v0.016
@@ -642,7 +642,7 @@ class VideoCanvas(QWidget):
 class RamVideoPlayer(QWidget):
     def __init__(self) -> None:
         super().__init__()
-        self.setWindowTitle(f"RAM Video Player QC v{__version__}")
+        self.setWindowTitle(f"RAM Video Player v{__version__}")
         self.setFocusPolicy(Qt.StrongFocus)
 
         self.frames: List[np.ndarray] = []
@@ -935,7 +935,7 @@ class RamVideoPlayer(QWidget):
     # ----- Changelog -----
     def show_changelog(self) -> None:
         dlg = QDialog(self)
-        dlg.setWindowTitle(f"Változások – RAM Video Player QC v{__version__}")
+        dlg.setWindowTitle(f"Változások – RAM Video Player v{__version__}")
         dlg.resize(760, 560)
 
         text = QTextEdit()
