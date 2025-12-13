@@ -1,0 +1,18 @@
+[project]
+name = "ram-video-player"
+version = "0.016"
+description = "RAM-based video player with QC annotation features"
+requires-python = ">=3.12"
+dependencies = [
+    "PySide6>=6.10.1",
+    "opencv-python>=4.12.0",
+    "numpy>=2.2.6",
+    "psutil>=7.1.3",
+]
+
+[project.scripts]
+ram-video-player = "video:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
