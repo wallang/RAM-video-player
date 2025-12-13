@@ -54,16 +54,17 @@ for:
       only:
         - image: macOS
 
+    environment:
+      PYTHON: "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+
     install:
-      - sh: brew install python@3.12
-      - sh: export PATH="/usr/local/opt/python@3.12/bin:$PATH"
-      - sh: python3.12 --version
-      - sh: python3.12 -m pip install --upgrade pip
-      - sh: python3.12 -m pip install -r requirements.txt
-      - sh: python3.12 -m pip install pyinstaller
+      - sh: $PYTHON --version
+      - sh: $PYTHON -m pip install --upgrade pip
+      - sh: $PYTHON -m pip install -r requirements.txt
+      - sh: $PYTHON -m pip install pyinstaller
 
     build_script:
-      - sh: python3.12 -m PyInstaller --windowed --name "RAM Video Player" video.py
+      - sh: $PYTHON -m PyInstaller --windowed --name "RAM Video Player" video.py
 
     after_build:
       - sh: ls -la dist/
