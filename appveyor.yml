@@ -16,8 +16,11 @@ branches:
 
 # Environment variables
 environment:
-  PYTHON: "C:\\Python312"
+  PYTHON: "C:\\Python312-x64"
   PYTHON_VERSION: "3.12"
+
+# Force 64-bit builds (PySide6 requires 64-bit)
+platform: x64
 
 # Build matrix
 for:
