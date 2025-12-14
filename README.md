@@ -158,3 +158,5 @@ This project uses:
 - PySide6 (LGPL)
 - OpenCV (Apache 2.0)
 - NumPy (BSD)
+
+
